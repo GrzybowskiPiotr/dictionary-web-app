@@ -2,3 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-CustomGray-dark-200 dark:bg-CustomGray-dark-400 dark:text-CustomGray-light-100;
+  }
+}

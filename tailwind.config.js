@@ -2,6 +2,7 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   safelist: ["font-sans", "font-serif", "font-mono"],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {

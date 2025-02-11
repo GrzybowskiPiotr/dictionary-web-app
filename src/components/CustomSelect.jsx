@@ -1,16 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { fontContext } from "../contexts/fontContext";
 import ARROW_DOWN_ICON from "../assets/images/icon-arrow-down.svg";
 
 export function CustomSelect({ options }) {
   const [isOptionShown, setIsOptionShown] = useState(false);
   const listRef = useRef(null);
 
+  const [fontMode, setFontMode] = useContext(fontContext);
+
   function handleSelectClick() {
     setIsOptionShown((prev) => !prev);
   }
 
   function handleOptionClick(className) {
-    console.log(className);
+    setFontMode(className);
     setIsOptionShown(false);
   }
 
@@ -48,12 +51,12 @@ export function CustomSelect({ options }) {
   }, [isOptionShown]);
 
   return (
-    <div className="outline-CustomPurple w-24 h-6  border-r-2 border-r-CustomGray-light-300 mr-2 relative ">
+    <div className="outline-CustomPurple  border-r-2 border-r-CustomGray-light-300 mr-2 relative ">
       <button
         onClick={handleSelectClick}
         className="outline-CustomPurple flex items-center justify-between w-full px-4 gap-4 "
       >
-        <p className="font-mono font-bold">Mono</p>
+        <p className={`font-${fontMode} font-bold text-sm`}>Mono</p>
         <img src={ARROW_DOWN_ICON} alt="Arrow icon" />
       </button>
 

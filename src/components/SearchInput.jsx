@@ -5,9 +5,9 @@ export function SearchInput({ onSearchSubmit }) {
       <input
         type="test"
         placeholder="Search for any word…"
-        className="font-bold w-full bg-CustomGray-light-200 mt-6 rounded-2xl py-4 px-6 focus:border-CustomPurple caret-CustomPurple outline-CustomPurple"
+        className="font-bold w-full bg-CustomGray-light-200 mt-6 rounded-2xl py-4 px-6 focus:border-1 border-CustomPurple caret-CustomPurple outline-CustomPurple outline-1 dark:bg-CustomGray-dark-300 dark:text-CustomGray-light-100"
       />
-      <button className="outline-CustomPurple absolute right-0 top-7 p-4">
+      <button className="outline-CustomPurple absolute right-2 top-7 p-4 dark:bg-CustomGray-dark-300">
         <img src={SEARCH_ICON} alt="search icon" />
       </button>
     </form>

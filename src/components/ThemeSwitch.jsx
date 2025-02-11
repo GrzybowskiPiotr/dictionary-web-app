@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import THEME_ICON from "/images/icon-moon.svg";
+import { svgFilter } from "../constans/svgFilter";
 export function ThemeSwitch() {
-  const [isLightMode, setIsLightMode] = useState(true);
+  const [isLightMode, setIsLightMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark" ? false : true;
+  });
+
+  useEffect(() => {
+    if (isLightMode) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+  }, [isLightMode]);
 
   function handleSwitchModeClick() {
     setIsLightMode((prev) => !prev);
   }
-
-  const svgFilter =
-    "brightness(0) saturate(100%) invert(29%) sepia(100%) saturate(1419%) hue-rotate(254deg) brightness(100%) contrast(88%)";
 
   return (
     <div className="flex gap-3">
