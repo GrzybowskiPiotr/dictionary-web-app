@@ -8,3 +8,23 @@
     @apply bg-white text-CustomGray-dark-200 dark:bg-CustomGray-dark-400 dark:text-CustomGray-light-100;
   }
 }
+@layer components {
+  .dark-theme {
+    @apply dark:bg-CustomGray-dark-400 dark:text-CustomGray-light-100;
+  }
+  .heading-L {
+    @apply text-[64px] leading-[77px];
+  }
+  .heading-M {
+    @apply text-[24px] leading-[29px];
+  }
+  .heading-S {
+    @apply text-[20px] leading-[24px];
+  }
+  .body-M {
+    @apply text-[18px] leading-[24px];
+  }
+  .body-S {
+    @apply text-[14px] leading-[17px];
+  }
+}

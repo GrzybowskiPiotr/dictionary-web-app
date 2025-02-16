@@ -5,6 +5,9 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      boxShadow: {
+        customPurple: "0px 5px 15px 3px rgba(164, 69, 237, 0.4)",
+      },
       fontFamily: {
         mono: ["Inconsolata", "monospace"],
         sansSerif: ["Inter", "sans-serif"],
@@ -23,6 +26,17 @@ export default {
         },
         CustomPurple: "#A445ED",
         CustomOrange: "#FF5252",
+        CustomPurpleDarkMode: "#A445ED",
+      },
+      keyframes: {
+        pop: {
+          "0%": { transform: "scale(0)", opacity: "0" },
+          "50%": { transform: "scale(1.05)", opacity: "1" },
+          "100%": { transform: "scale(1)" },
+        },
+      },
+      animation: {
+        pop: "pop 0.3s ease-out",
       },
     },
   },

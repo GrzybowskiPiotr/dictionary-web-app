@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchInput } from "./components/SearchInput";
 import { TopHeaderWithControls } from "./components/TopHeaderWithControls";
 import { fontContext } from "./contexts/fontContext";
+import { searchContext } from "./contexts/searchContext";
+import { Dictionary } from "./components/Dictionary";
+import { NotFound } from "./components/NotFound";
 export function App() {
-  function handleSearchSubmit() {
-    console.log("submit");
-  }
-
   const [fontMode, setFontMode] = useState(() => {
     const fontModeFromLocalStorage = localStorage.getItem("fontMode");
     if (!fontModeFromLocalStorage) {
@@ -15,69 +14,50 @@ export function App() {
     return fontModeFromLocalStorage;
   });
 
+  const [searchWord, setSearchWord] = useState("");
+
+  const [dictionaryData, setDictionaryData] = useState({
+    status: null,
+    responseData: null,
+  });
+
+  function handleSetDictionaryData(data) {
+    const { status, responseData } = data;
+    setDictionaryData({ status, responseData });
+  }
+
+  useEffect(() => {
+    const modal = document.getElementById("modal");
+    const body = document.body;
+    if (modal) {
+      body.removeChild(modal);
+    }
+  }, []);
+
   return (
-    <fontContext.Provider value={[fontMode, setFontMode]}>
-      <div aria-label="dictionary application" className="sm: max-w-80 pt-6 ">
-        <header>
-          <TopHeaderWithControls />
-          <SearchInput onSearchSubmit={handleSearchSubmit} />
-          <h1>Keyboard</h1>
-          <button aria-label="Play pronunciation">Play pronunciation</button>
-        </header>
-
-        <main>
-          <section>
-            <h2>noun</h2>
-
-            <h3>meaning</h3>
-
-            <ul>
-              <li>
-                * Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Molestias, vitae?
-              </li>
-              <li>
-                * Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                adipisci voluptatem voluptates a similique, modi molestias
-                nostrum ut accusamus in.
-              </li>
-              <li>
-                * Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-                aliquam voluptas cupiditate molestias iusto, adipisci illum
-                inventore debitis hic sequi!
-              </li>
-            </ul>
-
-            <p>
-              Synonyms <span>electrionic keybord</span>
-            </p>
-          </section>
-          <section>
-            <h2>verb</h2>
-
-            <h3>maining</h3>
-
-            <ul>
-              <li>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                dolor molestias dolores laudantium tenetur aliquam.
-              </li>
-            </ul>
-          </section>
-          <section>
-            <p>Source</p>
-
-            <a
-              href="https://wikipedia.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              https://wikipedia.com
-            </a>
-          </section>
-        </main>
-        <footer>Ja to zrobiłem</footer>
-      </div>
-    </fontContext.Provider>
+    <>
+      <fontContext.Provider value={[fontMode, setFontMode]}>
+        <searchContext.Provider value={[searchWord, setSearchWord]}>
+          <div
+            aria-label="dictionary application"
+            className={`p-7 w-screen font-${fontMode} flex-grow lg:w-[734px]`}
+          >
+            <header>
+              <TopHeaderWithControls />
+              <SearchInput setData={handleSetDictionaryData} />
+            </header>
+            {dictionaryData.status === 404 && (
+              <NotFound data={dictionaryData.responseData} />
+            )}
+            {dictionaryData.status === 200 && (
+              <Dictionary data={dictionaryData.responseData[0]} />
+            )}
+          </div>
+        </searchContext.Provider>
+      </fontContext.Provider>
+      <footer className="w-full bg-gray-800 text-white p-4 text-center">
+        Footer Content
+      </footer>
+    </>
   );
 }
