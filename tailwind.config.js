@@ -7,6 +7,7 @@ export default {
     extend: {
       boxShadow: {
         customPurple: "0px 5px 15px 3px rgba(164, 69, 237, 0.4)",
+        customAutofill: "0 0 0px 40rem #1f1f1f inset",
       },
       fontFamily: {
         mono: ["Inconsolata", "monospace"],

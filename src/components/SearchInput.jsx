@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { searchContext } from "../contexts/searchContext";
 import SEARCH_ICON from "../assets/images/icon-search.svg";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-export function SearchInput({ setData }) {
+export function SearchInput({ setData, fetching }) {
   const {
     register,
     handleSubmit,
@@ -12,7 +12,7 @@ export function SearchInput({ setData }) {
 
   const [searchWord, setSearchWord] = useContext(searchContext);
 
-  const { data, refetch } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["word"],
     queryFn: async () => {
       const res = await fetch(
@@ -22,9 +22,11 @@ export function SearchInput({ setData }) {
       if (res.status === 404) {
         setData({ status: 404, responseData: data });
       }
+
       if (res.ok) {
         setData({ status: 200, responseData: data });
       }
+
       return data;
     },
     enabled: false,
@@ -35,6 +37,11 @@ export function SearchInput({ setData }) {
     setTimeout(() => refetch(), 0);
   };
 
+  useEffect(() => {
+    console.log(`effect ${isFetching}`);
+    fetching(isFetching);
+  }, [isFetching, fetching]);
+
   return (
     <form
       className="relative mb-7"
@@ -44,8 +51,13 @@ export function SearchInput({ setData }) {
       <input
         {...register("searchInput", { required: "Whoops, can’t be empty…" })}
         type="test"
+        onChange={() => {
+          if (data) {
+            setData({ status: null, responseData: null });
+          }
+        }}
         placeholder="Search for any word…"
-        className={`peer font-bold w-full bg-CustomGray-light-200 mt-6 rounded-2xl py-4 px-6 focus:border-1  caret-CustomPurple outline-CustomPurple outline-1 dark:bg-CustomGray-dark-300 autofill:bg-red-600 dark:text-CustomGray-light-100 ${
+        className={`peer font-bold w-full bg-CustomGray-light-200 mt-6 rounded-2xl py-4 px-6 focus:border-1  caret-CustomPurple outline-CustomPurple outline-1 dark:bg-CustomGray-dark-300 dark:text-CustomGray-light-100 last:${
           errors.searchInput
             ? "border-CustomOrange caret-CustomOrange outline-CustomOrange"
             : "border-CustomPurple caret-CustomPurple outline-CustomPurple"

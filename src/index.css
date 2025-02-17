@@ -28,3 +28,16 @@
     @apply text-[14px] leading-[17px];
   }
 }
+@layer utilities {
+  .text-filll-white {
+    -webkit-text-fill-color: #ffffff;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  @apply text-gray-600 dark:shadow-customAutofill dark:text-white;
+  -webkit-text-fill-color: #ffffff;
+}
+/* Naprawić kolor textu w light mode gdy kożystam z autofilla */

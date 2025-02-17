@@ -5,6 +5,9 @@ import { fontContext } from "./contexts/fontContext";
 import { searchContext } from "./contexts/searchContext";
 import { Dictionary } from "./components/Dictionary";
 import { NotFound } from "./components/NotFound";
+import { LoadingModal } from "./components/LoadingModal";
+import { Footer } from "./components/Footer";
+
 export function App() {
   const [fontMode, setFontMode] = useState(() => {
     const fontModeFromLocalStorage = localStorage.getItem("fontMode");
@@ -13,7 +16,7 @@ export function App() {
     }
     return fontModeFromLocalStorage;
   });
-
+  const [isLoading, setIsLoading] = useState(false);
   const [searchWord, setSearchWord] = useState("");
 
   const [dictionaryData, setDictionaryData] = useState({
@@ -34,18 +37,26 @@ export function App() {
     }
   }, []);
 
+  function handleLoadingStateChange(loadingState) {
+    setIsLoading(loadingState);
+  }
+
   return (
     <>
       <fontContext.Provider value={[fontMode, setFontMode]}>
         <searchContext.Provider value={[searchWord, setSearchWord]}>
           <div
             aria-label="dictionary application"
-            className={`p-7 w-screen font-${fontMode} flex-grow lg:w-[734px]`}
+            className={`p-7 w-screen font-${fontMode} flex-grow md:w-[689px] lg:w-[736px]`}
           >
             <header>
               <TopHeaderWithControls />
-              <SearchInput setData={handleSetDictionaryData} />
+              <SearchInput
+                setData={handleSetDictionaryData}
+                fetching={handleLoadingStateChange}
+              />
             </header>
+            {isLoading && <LoadingModal />}
             {dictionaryData.status === 404 && (
               <NotFound data={dictionaryData.responseData} />
             )}
@@ -55,9 +66,7 @@ export function App() {
           </div>
         </searchContext.Provider>
       </fontContext.Provider>
-      <footer className="w-full bg-gray-800 text-white p-4 text-center">
-        Footer Content
-      </footer>
+      <Footer />
     </>
   );
 }
