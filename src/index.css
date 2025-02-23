@@ -37,7 +37,14 @@
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  @apply text-gray-600 dark:shadow-customAutofill dark:text-white;
-  -webkit-text-fill-color: #ffffff;
+  @apply border-CustomPurple;
+
+  -webkit-text-fill-color: theme("colors.gray.600") !important;
 }
-/* Naprawić kolor textu w light mode gdy kożystam z autofilla */
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px theme("colors.gray.800") inset !important;
+  -webkit-text-fill-color: white !important;
+}

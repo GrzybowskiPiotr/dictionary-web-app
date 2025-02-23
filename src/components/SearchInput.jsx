@@ -38,7 +38,6 @@ export function SearchInput({ setData, fetching }) {
   };
 
   useEffect(() => {
-    console.log(`effect ${isFetching}`);
     fetching(isFetching);
   }, [isFetching, fetching]);
 
@@ -50,7 +49,7 @@ export function SearchInput({ setData, fetching }) {
     >
       <input
         {...register("searchInput", { required: "Whoops, can’t be empty…" })}
-        type="test"
+        type="text"
         onChange={() => {
           if (data) {
             setData({ status: null, responseData: null });
@@ -68,7 +67,7 @@ export function SearchInput({ setData, fetching }) {
           {errors.searchInput.message}
         </p>
       )}
-      <button className="outline-CustomPurple absolute right-2 top-7 p-4 dark:bg-CustomGray-dark-300">
+      <button className="outline-CustomPurple absolute right-2 top-7 p-4 dark:bg-CustomGray-dark-300 rounded-2xl">
         <img src={SEARCH_ICON} alt="search icon" />
       </button>
     </form>

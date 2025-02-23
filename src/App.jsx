@@ -9,13 +9,9 @@ import { LoadingModal } from "./components/LoadingModal";
 import { Footer } from "./components/Footer";
 
 export function App() {
-  const [fontMode, setFontMode] = useState(() => {
-    const fontModeFromLocalStorage = localStorage.getItem("fontMode");
-    if (!fontModeFromLocalStorage) {
-      return "sansSerif";
-    }
-    return fontModeFromLocalStorage;
-  });
+  const [fontMode, setFontMode] = useState(
+    () => localStorage.getItem("fontMode") || "sansSerif"
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [searchWord, setSearchWord] = useState("");
 
@@ -30,11 +26,22 @@ export function App() {
   }
 
   useEffect(() => {
-    const modal = document.getElementById("modal");
-    const body = document.body;
-    if (modal) {
-      body.removeChild(modal);
-    }
+    const removeInitialLoadingScreen = () => {
+      const loadingScreen = document.querySelector("#modal");
+      if (loadingScreen) {
+        loadingScreen.classList.add("fade-out");
+
+        loadingScreen.addEventListener(
+          "animationend",
+          () => {
+            loadingScreen.remove();
+          },
+          { once: true }
+        );
+      }
+    };
+
+    removeInitialLoadingScreen();
   }, []);
 
   function handleLoadingStateChange(loadingState) {
