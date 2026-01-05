@@ -23,6 +23,7 @@ export function ThemeSwitch() {
   return (
     <div className="flex gap-3">
       <button
+        type="button"
         onClick={(e) => handleSwitchModeClick(e)}
         className={`outline-CustomPurple transition ease-in duration-200 w-10 h-5 rounded-[10px] ${
           isLightMode ? "bg-CustomGray-light-400 p-[3px]" : "bg-CustomPurple"

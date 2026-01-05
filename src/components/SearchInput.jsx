@@ -59,7 +59,7 @@ export function SearchInput({ setData, fetching }) {
         className={`peer font-bold w-full bg-CustomGray-light-200 mt-6 rounded-2xl py-4 px-6 focus:border-1  caret-CustomPurple outline-CustomPurple outline-1 dark:bg-CustomGray-dark-300 dark:text-CustomGray-light-100 last:${
           errors.searchInput
             ? "border-CustomOrange caret-CustomOrange outline-CustomOrange"
-            : "border-CustomPurple caret-CustomPurple outline-CustomPurple"
+            : "border-CustomPurple outline-CustomPurple"
         } `}
       />
       {errors.searchInput && (

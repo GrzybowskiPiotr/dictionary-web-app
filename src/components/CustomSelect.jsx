@@ -61,6 +61,7 @@ export function CustomSelect({ options }) {
   return (
     <div className="outline-CustomPurple  border-r-2 border-r-CustomGray-light-300 mr-2 relative ">
       <button
+        type="button"
         onClick={handleSelectClick}
         className="outline-CustomPurple flex items-center justify-between w-full px-4 gap-4 "
       >
