@@ -1,8 +1,8 @@
-import { useForm } from "react-hook-form";
-import { searchContext } from "../contexts/searchContext";
-import SEARCH_ICON from "../assets/images/icon-search.svg";
-import { useContext, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useContext, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import SEARCH_ICON from "../assets/images/icon-search.svg";
+import { searchContext } from "../contexts/searchContext";
 export function SearchInput({ setData, fetching }) {
   const {
     register,
@@ -45,7 +45,7 @@ export function SearchInput({ setData, fetching }) {
     <form
       className="relative mb-7"
       onSubmit={handleSubmit(onSubmit)}
-      autoComplete="false"
+      autoComplete="off"
     >
       <input
         {...register("searchInput", { required: "Whoops, can’t be empty…" })}
@@ -67,7 +67,7 @@ export function SearchInput({ setData, fetching }) {
           {errors.searchInput.message}
         </p>
       )}
-      <button className="outline-CustomPurple absolute right-2 top-7 p-4 dark:bg-CustomGray-dark-300 rounded-2xl">
+      <button className="outline-CustomPurple absolute right-2 top-7 p-4 dark:bg-CustomGray-dark-300 rounded-2xl" aria-label="Search for a word" type="submit">
         <img src={SEARCH_ICON} alt="search icon" />
       </button>
     </form>

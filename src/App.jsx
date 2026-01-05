@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { Dictionary } from "./components/Dictionary";
+import { Footer } from "./components/Footer";
+import { LoadingModal } from "./components/LoadingModal";
+import { NotFound } from "./components/NotFound";
 import { SearchInput } from "./components/SearchInput";
 import { TopHeaderWithControls } from "./components/TopHeaderWithControls";
 import { fontContext } from "./contexts/fontContext";
 import { searchContext } from "./contexts/searchContext";
-import { Dictionary } from "./components/Dictionary";
-import { NotFound } from "./components/NotFound";
-import { LoadingModal } from "./components/LoadingModal";
-import { Footer } from "./components/Footer";
 
 export function App() {
   const [fontMode, setFontMode] = useState(
@@ -52,7 +52,7 @@ export function App() {
     <>
       <fontContext.Provider value={[fontMode, setFontMode]}>
         <searchContext.Provider value={[searchWord, setSearchWord]}>
-          <div
+          <main
             aria-label="dictionary application"
             className={`p-7 w-screen font-${fontMode} flex-grow md:w-[689px] lg:w-[736px]`}
           >
@@ -70,7 +70,7 @@ export function App() {
             {dictionaryData.status === 200 && (
               <Dictionary data={dictionaryData.responseData[0]} />
             )}
-          </div>
+          </main>
         </searchContext.Provider>
       </fontContext.Provider>
       <Footer />
