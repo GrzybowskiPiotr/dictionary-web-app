@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import THEME_ICON from "/images/icon-moon.svg";
 import { svgFilter } from "../constans/svgFilter";
+import THEME_ICON from "/images/icon-moon.svg";
 export function ThemeSwitch() {
   const [isLightMode, setIsLightMode] = useState(() => {
     return localStorage.getItem("theme") === "dark" ? false : true;
@@ -27,6 +27,7 @@ export function ThemeSwitch() {
         className={`outline-CustomPurple transition ease-in duration-200 w-10 h-5 rounded-[10px] ${
           isLightMode ? "bg-CustomGray-light-400 p-[3px]" : "bg-CustomPurple"
         }   hover:bg-CustomPurple`}
+      aria-label="Toggle theme"
       >
         <div
           className={`transition ease-in-out duration-300 w-[14px] h-[14px] bg-CustomGray-light-100 rounded-full ${

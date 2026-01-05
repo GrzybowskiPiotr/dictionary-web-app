@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { fontContext } from "../contexts/fontContext";
 import ARROW_DOWN_ICON from "../assets/images/icon-arrow-down.svg";
+import { fontContext } from "../contexts/fontContext";
 
 export function CustomSelect({ options }) {
   const [isOptionShown, setIsOptionShown] = useState(false);
@@ -64,7 +64,7 @@ export function CustomSelect({ options }) {
         onClick={handleSelectClick}
         className="outline-CustomPurple flex items-center justify-between w-full px-4 gap-4 "
       >
-        <p className={`font-${fontMode} font-bold text-sm`}>{selectedFont}</p>
+        <span className={`font-${fontMode} font-bold text-sm`}>{selectedFont}</span>
         <img src={ARROW_DOWN_ICON} alt="Arrow icon" />
       </button>
 
