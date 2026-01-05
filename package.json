@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "start-server": "npm run dev",
     "test": "playwright test",
-    "ci": "start-server-and-test start-server http://localhost:5173 test",
+    "test:e2e": "start-server-and-test start-server http://localhost:5173 test",
     "test:headed": "npx playwright test --headed",
     "test:debug": "npx playwright test --debug",
     "test:report": "npx playwright show-report"
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
-    "@playwright/test": "^1.50.1",
+    "@playwright/test": "^1.57.0",
     "@tanstack/eslint-plugin-query": "^5.66.0",
     "@types/node": "^22.13.4",
     "@types/react": "^18.3.18",
